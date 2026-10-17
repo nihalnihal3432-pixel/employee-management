@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,th,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+            width: 100%;
+        }
+        button{
+            width: 100%;
+            margin-top: 2%;
+        }
+        .butt{
+            width: 90px;
+            background-color: black;
+            color: white;
+
+        }
+    </style>
+</head>
+<body>
+    <form method="GET">
+    <input
+        type="text"
+        name="search"
+        placeholder="Search by name, email, or department"
+        value="{{ request.GET.search }}"
+    >
+        <button class="butt" type="submit">Search</button>
+    </form>
+    <table>
+        <tr>
+            <th>name</th>
+            <th>email</th>
+            <th>department</th>
+            <th>salary</th>
+            <th>joining_date</th>
+            <th>edit</th>
+            <th>delete</th>
+
+        </tr>
+        {% for x in empl %}
+        <tr>
+            <td>{{x.name}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.department}}</td>
+            <td>{{x.salary}}</td>
+            <td>{{x.joining_date}}</td>
+            <td><a href="{% url 'editt' x.id %}">edit</a></td>
+            <td><a href="{% url 'dellt' x.id %}">delete</a></td>
+        </tr>
+          
+        {% endfor %}
+    </table>
+</body>
+</html>
